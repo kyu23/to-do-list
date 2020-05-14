@@ -1,0 +1,36 @@
+import React from 'react';
+
+const Task = (props) => {
+    const { task, index, list, setList } = props;
+
+    const onClick = () => {
+        setList(() => { 
+          return list.filter(task => list.indexOf(task) !== index); /* any tasks not = to index position brought thru by props do not take out */
+        });
+      };
+
+      const onChange = () => {
+        list[index].isComplete = !list[index].isComplete;
+        setList([...list]);
+      }
+
+    return(
+        <div className="container bg-secondary">
+            <h4> { task.name } </h4>
+            <div className="container">
+                <label htmlFor="checkbox">Completed?</label>
+                <input 
+                onChange = { onChange }
+                type="checkbox" 
+                checked={task.isComplete}
+                />
+                <button 
+                onClick = { onClick }
+                className="btn btn-sm btn-danger"
+                >X</button>
+            </div>
+        </div>
+    )
+}
+
+export default Task;
